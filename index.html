@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Da Lousa ao Mundo Digital | Grupo 3 - IFTM</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* Escalonamento Dinâmico de Fontes para TV e Telas Grandes */
+        html {
+            font-size: 16px;
+        }
+        @media (min-width: 992px) {
+            html { font-size: 17.5px; } /* Notebooks e Monitores */
+        }
+        @media (min-width: 1400px) {
+            html { font-size: 20px; }   /* TVs 1080p e Telas Grandes */
+        }
+        @media (min-width: 1920px) {
+            html { font-size: 22px; }   /* TVs 4K e Telões de Auditório */
+        }
+
+        :root {
+            --primary-blue: #0284c7;
+            --dark-blue: #0369a1;
+            --warm-amber: #b45309;
+            --soft-amber-bg: #fffbeb;
+            --emerald-green: #15803d;
+            --soft-green-bg: #f0fdf4;
+            --neutral-bg: #f1f5f9;
+            --text-main: #0f172a;
+            --text-muted-tv: #334155; /* Alto contraste para TV */
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--neutral-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .poster-title-font {
+            font-family: 'Fredoka', cursive, sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        /* Cartaz Principal */
+        .poster-canvas {
+            background-color: #ffffff;
+            border: 4px solid var(--primary-blue);
+            border-radius: 28px;
+            box-shadow: 0 20px 50px rgba(2, 132, 199, 0.15);
+            overflow: hidden;
+        }
+
+        /* Cabeçalho */
+        .poster-header {
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
+            color: #ffffff;
+            padding: 1.8rem 1.4rem;
+            position: relative;
+        }
+
+        .sun-icon {
+            font-size: 2.8rem;
+            color: #facc15;
+            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.25));
+            animation: softPulse 3s infinite alternate ease-in-out;
+        }
+
+        @keyframes softPulse {
+            0% { transform: scale(0.95) rotate(-6deg); }
+            100% { transform: scale(1.1) rotate(10deg); }
+        }
+
+        /* Botão de Tela Cheia para TV */
+        .btn-fullscreen {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50px;
+            padding: 0.35rem 0.9rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            backdrop-filter: blur(4px);
+            transition: all 0.2s;
+        }
+
+        .btn-fullscreen:hover {
+            background-color: #ffffff;
+            color: var(--dark-blue);
+        }
+
+        /* Colunas Comparativas */
+        .board-ontem {
+            background-color: var(--soft-amber-bg);
+            border: 3px dashed #d97706;
+            border-radius: 22px;
+        }
+
+        .board-hoje {
+            background-color: var(--soft-green-bg);
+            border: 3px dashed #16a34a;
+            border-radius: 22px;
+        }
+
+        .badge-tab-ontem {
+            background-color: var(--warm-amber);
+            color: #ffffff;
+            font-size: 1.35rem;
+            border-radius: 14px;
+            padding: 8px 24px;
+            display: inline-block;
+        }
+
+        .badge-tab-hoje {
+            background-color: var(--emerald-green);
+            color: #ffffff;
+            font-size: 1.35rem;
+            border-radius: 14px;
+            padding: 8px 24px;
+            display: inline-block;
+        }
+
+        /* Imagens */
+        .img-showcase {
+            width: 100%;
+            border-radius: 14px;
+            object-fit: cover;
+            border: 2px solid rgba(0,0,0,0.06);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .img-showcase:hover {
+            transform: scale(1.02);
+        }
+
+        .img-caption {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-muted-tv);
+            margin-top: 6px;
+            text-align: center;
+        }
+
+        /* Itens de Recursos */
+        .item-card {
+            background: #ffffff;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 14px;
+            padding: 12px 14px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            transition: all 0.2s ease;
+        }
+
+        .item-card:hover {
+            transform: translateX(4px);
+            border-color: var(--primary-blue);
+        }
+
+        /* Balões Centrais */
+        .bubble-central {
+            background: #f0f9ff;
+            border: 2.5px solid #7dd3fc;
+            border-radius: 20px;
+            padding: 22px;
+        }
+
+        .bubble-teacher {
+            background: #fefce8;
+            border: 2.5px solid #fde047;
+            border-radius: 20px;
+            padding: 22px;
+        }
+
+        /* Rodapé do Cartaz */
+        .footer-card {
+            border-radius: 18px;
+            height: 100%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            border-width: 2.5px !important;
+        }
+
+        .card-proposta {
+            background: #eff6ff;
+            border: 2.5px solid #3b82f6;
+        }
+
+        .card-reflexao {
+            background: #fffbeb;
+            border: 2.5px solid #f59e0b;
+        }
+
+        .card-fontes {
+            background: #f8fafc;
+            border: 2.5px solid #64748b;
+        }
+
+        /* Síntese Conclusiva */
+        .conclusion-card {
+            background: #ffffff;
+            border-left: 8px solid var(--primary-blue);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+        }
+
+        /* Rodapé Oficial dos Alunos */
+        .site-footer {
+            background: #0f172a;
+            color: #f8fafc;
+            border-radius: 24px;
+            border: 2px solid #334155;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+        }
+
+        .text-readable {
+            color: var(--text-muted-tv) !important;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+    </style>
+</head>
+<body class="py-3 py-lg-4">
+
+<div class="container-xxl">
+
+    <!-- CARTAZ PRINCIPAL -->
+    <article class="poster-canvas mb-4">
+        
+        <!-- Cabeçalho Superior -->
+        <header class="poster-header text-center">
+            <div class="d-flex justify-content-between align-items-center px-2 px-md-4">
+                <i class="bi bi-brightness-high-fill sun-icon d-none d-md-block"></i>
+                
+                <div class="mx-auto">
+                    <h1 class="poster-title-font display-5 fw-bold mb-2">
+                        Da lousa ao mundo digital: a evolução dos recursos escolares
+                    </h1>
+                    <span class="badge bg-white text-primary px-4 py-2 fs-5 rounded-pill fw-bold shadow-sm">
+                        A escola brasileira: memórias, direitos e tecnologias
+                    </span>
+                </div>
+
+                <div class="d-flex flex-column align-items-end gap-2">
+                    <i class="bi bi-brightness-high-fill sun-icon d-none d-md-block"></i>
+                    <!-- Botão para Apresentação em Tela Cheia na TV -->
+                    <button class="btn btn-fullscreen" onclick="alternarTelaCheia()" title="Ideal para projetores e TVs">
+                        <i class="bi bi-arrows-fullscreen me-1"></i> <span class="d-none d-sm-inline">Modo TV</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Corpo Principal do Cartaz -->
+        <div class="p-3 p-md-4 p-xl-5">
+            <div class="row g-4 align-items-stretch">
+
+                <!-- COLUNA 1: ONTEM (Memória e Tradição) -->
+                <div class="col-lg-3 col-md-6 order-1">
+                    <div class="board-ontem p-3 p-xl-4 h-100 d-flex flex-column gap-3 text-center">
+                        <div class="badge-tab-ontem poster-title-font shadow-sm align-self-center">
+                            <i class="bi bi-hourglass-split me-1"></i> Ontem
+                        </div>
+
+                        <!-- Imagem: Recursos de Ontem -->
+                        <div>
+                            <img src="img/recursosdeontem.png" alt="Recursos escolares de ontem" class="img-showcase">
+                            <div class="img-caption">Objetos da escola tradicional</div>
+                        </div>
+
+                        <!-- Lista de Recursos -->
+                        <div class="d-flex flex-column gap-2 text-start">
+                            <div class="item-card d-flex align-items-center gap-3">
+                                <i class="bi bi-easel text-warning fs-2"></i>
+                                <div>
+                                    <strong class="d-block text-dark fs-6">Quadro-negro e giz</strong>
+                                    <span class="text-readable small">Exposição e cópia centralizadas</span>
+                                </div>
+                            </div>
+                            <div class="item-card d-flex align-items-center gap-3">
+                                <i class="bi bi-book text-warning fs-2"></i>
+                                <div>
+                                    <strong class="d-block text-dark fs-6">Cartilhas e impressos</strong>
+                                    <span class="text-readable small">Leituras lineares padronizadas</span>
+                                </div>
+                            </div>
+                            <div class="item-card d-flex align-items-center gap-3">
+                                <i class="bi bi-pen text-warning fs-2"></i>
+                                <div>
+                                    <strong class="d-block text-dark fs-6">Caderno e lápis</strong>
+                                    <span class="text-readable small">Registro manual e repetição mecânica</span>
+                                </div>
+                            </div>
+                            <div class="item-card d-flex align-items-center gap-3">
+                                <i class="bi bi-keyboard text-warning fs-2"></i>
+                                <div>
+                                    <strong class="d-block text-dark fs-6">Máquina de escrever</strong>
+                                    <span class="text-readable small">Técnica e rigor formal</span>
+                                </div>
+                            </div>
+                            <div class="item-card d-flex align-items-center gap-3">
+                                <i class="bi bi-collection text-warning fs-2"></i>
+                                <div>
+                                    <strong class="d-block text-dark fs-6">Enciclopédias físicas</strong>
+                                    <span class="text-readable small">Conhecimento fixado em volumes</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Imagem: Escola Ontem Memória e Tradição -->
+                        <div class="mt-auto pt-2">
+                            <img src="img/escolaontemmemoriaetradicao.png" alt="Escola Ontem: Memória e Tradição" class="img-showcase">
+                            <div class="img-caption">Memória & Disciplina Escolar</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COLUNA 2: CENTRO (Reflexão, Transição e Imagens Narrativas) -->
+                <div class="col-lg-6 col-md-12 order-3 order-lg-2 d-flex flex-column justify-content-between gap-3">
+                    
+                    <!-- Balão 1: O Que Mudou na Educação? -->
+                    <div class="bubble-central shadow-sm">
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <span class="badge bg-primary fs-5 px-3 py-2 rounded-pill">
+                                <i class="bi bi-arrow-left-right me-1"></i> O que mudou na educação?
+                            </span>
+                        </div>
+                        <p class="mb-0 text-readable">
+                            Por muitas décadas, a escola brasileira concentrou-se na <strong>reprodução e memorização</strong>: a lousa como foco absoluto, cartilhas como verdades únicas e o estudante em postura passiva. Com o mundo digital, o aprendizado ganhou <strong>ritmo investigativo</strong>: pesquisas em tempo real, mídias dinâmicas e simuladores conectam os educandos a múltiplos saberes com rapidez e profundidade.
+                        </p>
+                    </div>
+
+                    <!-- Bloco Comparativo Visual Central -->
+                    <div class="row g-3 align-items-center">
+                        <div class="col-sm-6">
+                            <div class="p-3 border rounded-4 bg-white text-center shadow-sm h-100">
+                                <img src="img/lousaerepeticao.png" alt="Lousa e Repetição" class="img-showcase mb-2">
+                                <strong class="d-block text-dark fs-5">Lousa e Repetição</strong>
+                                <span class="text-readable small">Foco na transmissão mecânica</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="p-3 border rounded-4 bg-white text-center shadow-sm h-100">
+                                <img src="img/pesquisaeprotagonismo.png" alt="Pesquisa e Protagonismo" class="img-showcase mb-2">
+                                <strong class="d-block text-dark fs-5">Pesquisa e Protagonismo</strong>
+                                <span class="text-readable small">Foco na autoria e resolução ativa</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Balão 2: O Papel Humano do Professor -->
+                    <div class="bubble-teacher shadow-sm">
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <i class="bi bi-person-heart text-danger fs-3"></i>
+                            <h2 class="h4 fw-bold text-dark mb-0">O docente é o coração da aprendizagem</h2>
+                        </div>
+                        <p class="mb-0 text-readable">
+                            Telas e tecnologias processam dados em segundos, mas <strong>não ensinam a pensar criticamente</strong> nem acolhem as individualidades dos estudantes. O professor segue indispensável para mediar o conhecimento, cultivar valores éticos, combater a desinformação e orientar a turma na construção de um saber humanizado e cidadão.
+                        </p>
+                    </div>
+
+                    <!-- Articulação com Módulos 2 e 3 -->
+                    <div class="p-3 bg-light border rounded-4 text-readable">
+                        <strong><i class="bi bi-mortarboard-fill text-primary me-2 fs-5"></i>Elo com o Curso (Módulos 2 e 3):</strong>
+                        Compreendemos a história dos métodos tradicionais do século XX (Módulo 2) para garantir que as novas tecnologias (Módulo 3) não sirvam apenas como uma "cópia digitalizada" das velhas práticas de exclusão.
+                    </div>
+
+                </div>
+
+                <!-- COLUNA 3: HOJE (Conexão e Autoria) -->
+                <div class="col-lg-3 col-md-6 order-2 order-lg-3">
+                    <div class="board-hoje p-3 p-xl-4 h-100 d-flex flex-column gap-3 text-center">
+                        <div class="badge-tab-hoje poster-title-font shadow-sm align-self-center">
+                            <i class="bi bi-wifi me-1"></i> Hoje
+                        </div>
+
+                        <!-- Imagem: Recursos de Hoje -->
+                        <div>
+                            <img src="img/recursosdehoje.png" alt="Recursos escolares de hoje" class="img-showcase">
+                            <div class="img-caption">Ambientes conectados e multimídia</div>
+                        </div>
+
+                        <!-- Lista de Recursos -->
+                        <div class="d-flex flex-column gap-2 text-start">
+                            <div class="item-card d-flex align-items-center gap-3">
+                                <i class="bi bi-laptop text-success fs-2"></i>
+                                <div>
+                                    <strong class="d-block text-dark fs-6">Computadores e Laptops</strong>
+                                    <span class="text-readable small">Autoria, código e edição</span>
+                                </div>
+                            </div>
+                            <div class="item-card d-flex align-items-center gap-3">
+                                <i class="bi bi-tablet text-success fs-2"></i>
+                                <div>
+                                    <strong class="d-block text-dark fs-6">Tablets e Smartphones</strong>
+                                    <span class="text-readable small">Portabilidade e pesquisa instantânea</span>
+                                </div>
+                            </div>
+                            <div class="item-card d-flex align-items-center gap-3">
+                                <i class="bi bi-display text-success fs-2"></i>
+                                <div>
+                                    <strong class="d-block text-dark fs-6">Lousas Digitais</strong>
+                                    <span class="text-readable small">Interatividade visual em tempo real</span>
+                                </div>
+                            </div>
+                            <div class="item-card d-flex align-items-center gap-3">
+                                <i class="bi bi-globe2 text-success fs-2"></i>
+                                <div>
+                                    <strong class="d-block text-dark fs-6">Internet e Redes</strong>
+                                    <span class="text-readable small">Acesso aberto e acervos mundiais</span>
+                                </div>
+                            </div>
+                            <div class="item-card d-flex align-items-center gap-3">
+                                <i class="bi bi-code-slash text-success fs-2"></i>
+                                <div>
+                                    <strong class="d-block text-dark fs-6">Pensamento Computacional</strong>
+                                    <span class="text-readable small">Resolução criativa de problemas</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Imagem: Escola Hoje Conexão e Autoria -->
+                        <div class="mt-auto pt-2">
+                            <img src="img/escolahojeconexaoeautoria.png" alt="Escola Hoje: Conexão e Autoria" class="img-showcase">
+                            <div class="img-caption">Conexão, Autoria & Inclusão</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- RODAPÉ DO CARTAZ: Proposta, Pergunta e Fontes -->
+            <div class="row g-4 mt-3">
+                
+                <!-- Card 1: Proposta Pedagógica (Item 5 da folha) -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-card card-proposta p-4">
+                        <div class="badge bg-primary text-white fs-6 mb-2 fw-bold px-3 py-2">
+                            <i class="bi bi-lightbulb-fill me-1"></i> Proposta Pedagógica (Item 5)
+                        </div>
+                        <h3 class="h4 fw-bold text-primary mb-2">Oficina "Pontes entre Tempos"</h3>
+                        <p class="text-readable mb-2">Articulando suportes analógicos e digitais sem reproduzir a mera cópia:</p>
+                        <ul class="list-unstyled text-readable mb-0">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i><strong>1. Investigação:</strong> Contrastar textos em livros impressos com pesquisas guiadas na web.</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i><strong>2. Crítica:</strong> Checar a veracidade de fontes e identificar permanências históricas.</li>
+                            <li><i class="bi bi-check-circle-fill text-primary me-2"></i><strong>3. Autoria:</strong> Criar mapas mentais interativos ou programas educativos (Scratch).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 2: Pergunta para Reflexão / Debate Coletivo -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-card card-reflexao p-4">
+                        <div class="badge bg-warning text-dark fs-6 mb-2 fw-bold px-3 py-2">
+                            <i class="bi bi-patch-question-fill me-1"></i> Pergunta para Reflexão
+                        </div>
+                        <h3 class="h4 fw-bold text-dark mb-2">"A tecnologia substitui o professor?"</h3>
+                        <p class="text-readable mb-0">
+                            <strong>Resposta Fundamental:</strong> Não. Aparelhos tecnológicos transmitem dados; <strong>quem educa são os sujeitos</strong>. As ferramentas digitais enriquecem as mediações, mas a escuta acolhedora, a sensibilidade pedagógica e a provocação reflexiva pertencem à relação humana com o docente.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 3: Identificação Oficial das Fontes -->
+                <div class="col-lg-4 col-md-12">
+                    <div class="footer-card card-fontes p-4">
+                        <div class="badge bg-secondary text-white fs-6 mb-2 fw-bold px-3 py-2">
+                            <i class="bi bi-file-earmark-person-fill me-1"></i> Identificação das Fontes
+                        </div>
+                        <ul class="list-unstyled text-readable mb-0" style="line-height: 1.8;">
+                            <li><strong>Tema:</strong> Recursos de ontem e de hoje</li>
+                            <li><strong>Instituição:</strong> IFTM - Campus Avançado Uberaba Parque Tecnológico</li>
+                            <li><strong>Curso:</strong> Licenciatura em Computação (3º Período)</li>
+                            <li><strong>Disciplina:</strong> Fundamentos Históricos da Educação</li>
+                            <li><strong>Professor:</strong> Anderson Claytom Ferreira Brettas</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </article>
+
+    <!-- SÍNTESE CONCLUSIVA INTEGRADA (Item 6 da folha) -->
+    <section class="conclusion-card p-4 p-md-5 mb-4">
+        <div class="d-flex align-items-center gap-2 mb-2">
+            <span class="badge bg-success-subtle text-success-emphasis border border-success fw-bold fs-6 px-3 py-1">
+                <i class="bi bi-journal-check me-1"></i> Registro Formal de Entrega (Item 6)
+            </span>
+            <span class="text-muted">Síntese de conclusão e proposta pedagógica</span>
+        </div>
+        
+        <h2 class="h3 fw-bold text-dark mb-3">Síntese Analítica do Grupo 3</h2>
+        
+        <p class="text-readable mb-0" style="font-size: 1.15rem; line-height: 1.9; text-align: justify;">
+            A análise comparativa entre os suportes escolares tradicionais e as tecnologias contemporâneas evidencia que os recursos de cada época refletem escolhas pedagógicas e sociais. Enquanto o quadro de giz e as cartilhas do século XX priorizavam a transmissão vertical e a cópia passiva de conteúdos, os dispositivos conectados abrem espaço para a pesquisa ativa e a produção em rede. Articulando os modelos históricos de escolarização (Módulo 2) com a mediação tecnológica (Módulo 3), percebemos que o computador não deve funcionar como mera "lousa digital de cópia". Propomos oficinas investigativas de letramento digital e programação criativa, garantindo que a tecnologia amplie a inclusão escolar sob a indispensável mediação humanizadora do professor.
+        </p>
+    </section>
+
+    <!-- Frase Síntese do Debate Geral -->
+    <div class="text-center my-4 text-muted">
+        <p class="fs-5 mb-0 fst-italic">
+            <i class="bi bi-quote fs-3 text-warning align-middle"></i>
+            Conhecer a história da escola ajuda a escolher o que queremos preservar e o que precisamos transformar.
+            <i class="bi bi-quote fs-5 text-warning align-middle"></i>
+        </p>
+    </div>
+
+    <!-- RODAPÉ OFICIAL SOLICITADO (ALUNOS E DISCIPLINA) -->
+    <footer class="site-footer p-4 p-md-4 mb-4">
+        <div class="row g-3 align-items-center">
+            
+            <!-- Alunos Integrantes -->
+            <div class="col-md-6 border-end-md border-secondary">
+                <div class="d-flex align-items-center gap-3">
+                    <i class="bi bi-people-fill text-warning fs-1"></i>
+                    <div>
+                        <span class="text-uppercase tracking-wider text-warning fw-bold small d-block">
+                            Alunos Integrantes do Grupo 3:
+                        </span>
+                        <div class="fs-5 fw-bold text-light">
+                            Alexia Gabriela Dornelas Coelho
+                        </div>
+                        <div class="fs-5 fw-bold text-light">
+                            Lenon Yuri Silva
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Disciplina e Instituição -->
+            <div class="col-md-6 ps-md-4">
+                <div class="d-flex align-items-center gap-3">
+                    <i class="bi bi-mortarboard text-info fs-1"></i>
+                    <div>
+                        <span class="text-uppercase tracking-wider text-info fw-bold small d-block">
+                            Disciplina & Curso:
+                        </span>
+                        <div class="fs-5 fw-semibold text-light">
+                            Disciplina: Fundamentos Históricos da Educação
+                        </div>
+                        <div class="text-secondary small">
+                            Licenciatura em Computação • IFTM Campus Avançado Uberaba Parque Tecnológico
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+</div>
+
+<!-- Bootstrap 5 Bundle JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Script para Alternar Tela Cheia na TV/Projetor -->
+<script>
+    function alternarTelaCheia() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(err => {
+                console.log(`Erro ao ativar tela cheia: ${err.message}`);
+            });
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
