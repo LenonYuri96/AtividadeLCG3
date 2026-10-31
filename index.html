@@ -212,6 +212,28 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.06);
         }
 
+        /* Seção de Referências Bibliográficas */
+        .references-card {
+            background: #ffffff;
+            border: 2.5px solid #94a3b8;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+        }
+
+        .references-card .ref-item {
+            padding: 10px 14px;
+            border-left: 4px solid var(--primary-blue);
+            background: #f8fafc;
+            border-radius: 0 10px 10px 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-muted-tv);
+        }
+
+        .references-card .ref-item strong {
+            color: var(--text-main);
+        }
+
         /* Rodapé Oficial dos Alunos */
         .site-footer {
             background: #0f172a;
@@ -469,18 +491,17 @@
                     </div>
                 </div>
 
-                <!-- Card 3: Identificação Oficial das Fontes -->
+                <!-- Card 3: Identificação Oficial das Fontes (ATUALIZADO) -->
                 <div class="col-lg-4 col-md-12">
                     <div class="footer-card card-fontes p-4">
                         <div class="badge bg-secondary text-white fs-6 mb-2 fw-bold px-3 py-2">
-                            <i class="bi bi-file-earmark-person-fill me-1"></i> Identificação das Fontes
+                            <i class="bi bi-journal-bookmark-fill me-1"></i> Fontes da Pesquisa
                         </div>
-                        <ul class="list-unstyled text-readable mb-0" style="line-height: 1.8;">
-                            <li><strong>Tema:</strong> Recursos de ontem e de hoje</li>
-                            <li><strong>Instituição:</strong> IFTM - Campus Avançado Uberaba Parque Tecnológico</li>
-                            <li><strong>Curso:</strong> Licenciatura em Computação (3º Período)</li>
-                            <li><strong>Disciplina:</strong> Fundamentos Históricos da Educação</li>
-                            <li><strong>Professor:</strong> Anderson Claytom Ferreira Brettas</li>
+                        <ul class="list-unstyled text-readable mb-0" style="line-height: 1.7; font-size: 0.92rem;">
+                            <li class="mb-2"><i class="bi bi-book text-secondary me-2"></i><strong>BARRA, V. M. L.</strong> <em>Da pedra ao pó: o itinerário da lousa na escola pública paulista do século XIX</em>. Goiânia: Gráfica IFG, 2016.</li>
+                            <li class="mb-2"><i class="bi bi-book text-secondary me-2"></i><strong>SOUZA, R. F.</strong> Objetos de ensino: a renovação pedagógica e material da escola primária no Brasil, no século XX. <em>Educar em Revista</em>, Curitiba, n. 49, p. 103-120, 2013.</li>
+                            <li class="mb-2"><i class="bi bi-file-earmark-text text-secondary me-2"></i><strong>VIDAL, E. M.; MERCADO, L. P. L.</strong> Mediação pedagógica e tecnologias digitais: reflexões sobre a prática docente. <em>Anais...</em>, 2020.</li>
+                            <li><i class="bi bi-file-earmark-check text-secondary me-2"></i><strong>BRASIL.</strong> <em>BNCC Computação</em>: complemento à Base Nacional Comum Curricular. Brasília, DF, 2022.</li>
                         </ul>
                     </div>
                 </div>
@@ -504,6 +525,31 @@
         <p class="text-readable mb-0" style="font-size: 1.15rem; line-height: 1.9; text-align: justify;">
             A análise comparativa entre os suportes escolares tradicionais e as tecnologias contemporâneas evidencia que os recursos de cada época refletem escolhas pedagógicas e sociais. Enquanto o quadro de giz e as cartilhas do século XX priorizavam a transmissão vertical e a cópia passiva de conteúdos, os dispositivos conectados abrem espaço para a pesquisa ativa e a produção em rede. Articulando os modelos históricos de escolarização (Módulo 2) com a mediação tecnológica (Módulo 3), percebemos que o computador não deve funcionar como mera "lousa digital de cópia". Propomos oficinas investigativas de letramento digital e programação criativa, garantindo que a tecnologia amplie a inclusão escolar sob a indispensável mediação humanizadora do professor.
         </p>
+    </section>
+
+    <!-- SEÇÃO DE REFERÊNCIAS BIBLIOGRÁFICAS COMPLETAS (ABNT) -->
+    <section class="references-card p-4 p-md-5 mb-4">
+        <div class="d-flex align-items-center gap-2 mb-3">
+            <span class="badge bg-secondary fs-6 px-3 py-2 fw-bold">
+                <i class="bi bi-journals me-1"></i> Referências Bibliográficas
+            </span>
+            <span class="text-muted small">Norma ABNT NBR 6023</span>
+        </div>
+
+        <div class="d-flex flex-column gap-2">
+            <div class="ref-item">
+                <strong>BARRA, Valdeniza Maria Lopes da.</strong> <em>Da pedra ao pó: o itinerário da lousa na escola pública paulista do século XIX</em>. Goiânia: Gráfica IFG, 2016.
+            </div>
+            <div class="ref-item">
+                <strong>BRASIL.</strong> <em>BNCC Computação: complemento à Base Nacional Comum Curricular</em>. Brasília, DF: Ministério da Educação, 2022.
+            </div>
+            <div class="ref-item">
+                <strong>SOUZA, Rosa Fátima de.</strong> Objetos de ensino: a renovação pedagógica e material da escola primária no Brasil, no século XX. <em>Educar em Revista</em>, Curitiba, n. 49, p. 103-120, jul./set. 2013.
+            </div>
+            <div class="ref-item">
+                <strong>VIDAL, Eloísa Maia; MERCADO, Luis Paulo Leopoldo.</strong> Mediação pedagógica e tecnologias digitais: reflexões sobre a prática docente. In: <em>Anais do Congresso Internacional de Educação e Tecnologias</em>. São Paulo: CIET, 2020.
+            </div>
+        </div>
     </section>
 
     <!-- Frase Síntese do Debate Geral -->
